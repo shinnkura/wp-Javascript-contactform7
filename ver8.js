@@ -44,8 +44,12 @@ const updateLabelsAndValues = () => {
     const label = job.parentNode.querySelector(".wpcf7-list-item-label");
     const chosenIndex = chosen.indexOf(i);
     if (chosenIndex > -1) {
-      const rank = ` 第${chosenIndex + 1}志望`;
-      label.textContent = originalLabel[i] + rank;
+      const rankSpan = document.createElement("span");
+      const rank = ` 第${chosenIndex + 1}希望`;
+      rankSpan.textContent = rank;
+      rankSpan.style.color = "#f4c121";
+      label.textContent = originalLabel[i];
+      label.appendChild(rankSpan);
       job.value = originalValue[i] + rank;
     } else {
       label.textContent = originalLabel[i];
