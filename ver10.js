@@ -23,6 +23,21 @@ function disableNoInterestCheckbox() {
   );
   noInterestCheckbox.checked = false;
   noInterestCheckbox.disabled = true;
+  noInterestCheckbox.parentNode.querySelector(
+    ".wpcf7-list-item-label"
+  ).style.color = "#b4afaf"; // フォントカラーを設定
+}
+
+function enableNoInterestIfNoJobsChosen() {
+  if (chosenJobIndices.length === 0) {
+    const noInterestCheckbox = jobCheckboxes.find(
+      (job) => job.value === "この求人には興味なし"
+    );
+    noInterestCheckbox.disabled = false;
+    noInterestCheckbox.parentNode.querySelector(
+      ".wpcf7-list-item-label"
+    ).style.color = ""; // フォントカラーをリセット
+  }
 }
 
 function addJobToChosen(index) {
@@ -33,15 +48,6 @@ function removeJobFromChosen(index) {
   const chosenIndex = chosenJobIndices.indexOf(index);
   if (chosenIndex > -1) {
     chosenJobIndices.splice(chosenIndex, 1);
-  }
-}
-
-function enableNoInterestIfNoJobsChosen() {
-  if (chosenJobIndices.length === 0) {
-    const noInterestCheckbox = jobCheckboxes.find(
-      (job) => job.value === "この求人には興味なし"
-    );
-    noInterestCheckbox.disabled = false;
   }
 }
 

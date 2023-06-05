@@ -1,4 +1,3 @@
-// グローバル変数の初期化
 let jobCheckboxes = Array.from(
   document.querySelectorAll('.work input[type="checkbox"]')
 );
@@ -51,17 +50,22 @@ function updateJobLabelsAndValues() {
       ".wpcf7-list-item-label"
     );
     const chosenIndex = chosenJobIndices.indexOf(i);
-    label.textContent = originalLabels[i]; // ラベルを元に戻す
+    const labelWrapper = document.createElement("span");
+    labelWrapper.textContent = originalLabels[i];
 
     if (chosenIndex > -1) {
       const rankSpan = document.createElement("span");
-      rankSpan.textContent = ` 第${chosenIndex + 1}希望`;
+      rankSpan.textContent = chosenIndex + 1;
+      // 		rankSpan.valueContent = ` 第${chosenIndex + 1}希望`;
       rankSpan.style.color = "#5999E8";
-      label.appendChild(rankSpan);
+      labelWrapper.prepend(rankSpan);
       jobCheckbox.value = originalValues[i] + rankSpan.textContent;
     } else {
       jobCheckbox.value = originalValues[i];
     }
+
+    label.textContent = "";
+    label.prepend(labelWrapper);
   });
 }
 
